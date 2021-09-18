@@ -20,20 +20,21 @@ void printFile() {
 
 int main(){
     ofstream outf("results.txt", ios :: app);
-    string name, second_name, book;
-    cout << "Enter your name: ";
-    cin >> name;
-    cout << "Enter your second name: ";
-    cin >> second_name;
-    cout << "Enter some book: ";
-    getline(cin, book);
-    getline(cin, book);
-    outf << "Name: " << name << endl << "Second name: " << second_name << endl << "Some book: " << book << endl;
-    outf.close();
-    cout << "Do you wont to see all results?" << endl;
+    cout << "Do you want to conduct a survey or get results? Enter survey or results: ";
     string answer;
-    cin >> answer;
-    if (answer == "YES" || answer == "Y" || answer == "yes" || answer == "y" || answer == "Да" || answer == "да") {
+    getline(cin, answer);
+    if (answer == "survey") {
+        string name, second_name, book;
+        cout << "Enter your name: ";
+        cin >> name;
+        cout << "Enter your second name: ";
+        cin >> second_name;
+        cout << "Enter some book: ";
+        getline(cin, book);
+        getline(cin, book);
+        outf << "Name: " << name << endl << "Second name: " << second_name << endl << "Some book: " << book << endl;
+    } else {
         printFile();
     }
+    outf.close();
 }
