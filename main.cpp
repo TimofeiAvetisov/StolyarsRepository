@@ -4,17 +4,19 @@
 
 using namespace std;
 
-int main(){
+void questions(){
     ofstream outf("results.txt", ios :: app);
-    string name, second_name, book;
-    cout << "Enter your name: ";
-    cin >> name;
-    cout << "Enter your second name: ";
-    cin >> second_name;
-    cout << "Enter some book: ";
-    getline(cin, book);
-    getline(cin, book);
-    outf << "Name: " << name << endl << "Second name: " << second_name << endl << "Some book: " << book << endl;
+    ifstream inf("inputfile.txt");
+    string question, answer_type, answer;
+    while(getline(inf, question)){
+        getline(inf, answer_type);
+        cout << question << ": ";
+        getline(cin, answer);
+        outf << answer_type << ": " << answer << endl;
+    }
     outf.close();
+}
 
+int main(){
+    questions();
 }
