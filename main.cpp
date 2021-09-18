@@ -17,6 +17,27 @@ void questions(){
     outf.close();
 }
 
+void printFile() {
+    fstream inf("results.txt");
+    string name, second_name, book;
+    int i = 0;
+    while (getline(inf, name)) {
+        ++i;
+        getline(inf, second_name);
+        getline(inf, book);
+        cout << "Result number " << i << ": " << endl << name << endl << second_name << endl << book << endl;
+    }
+
+}
+
+
 int main(){
-    questions();
+    cout << "Do you want to conduct a survey or get results? Enter survey or results: ";
+    string answer;
+    getline(cin, answer);
+    if (answer == "survey") {
+        questions();
+    } else {
+        printFile();
+    }
 }
