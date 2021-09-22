@@ -1,31 +1,48 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <vector>
+#include <algorithm>
 
 using namespace std;
 
 void questions(){
     ofstream outf("results.txt", ios :: app);
     ifstream inf("inputfile.txt");
+    int c = 0;
     string question, answer_type, answer;
+    vector<string> a;
     while(getline(inf, question)){
         getline(inf, answer_type);
         cout << question << ": ";
         getline(cin, answer);
-        outf << answer_type << ": " << answer << endl;
+        a.push_back(answer_type + ": " + answer + '\n');
+        c++;
+    }
+    outf << c << endl;
+    for (auto b : a) {
+        outf << b;
     }
     outf.close();
 }
 
 void printFile() {
     fstream inf("results.txt");
-    string name, second_name, book;
-    int i = 0;
-    while (getline(inf, name)) {
-        ++i;
-        getline(inf, second_name);
-        getline(inf, book);
-        cout << "Result number " << i << ": " << endl << name << endl << second_name << endl << book << endl;
+    string answer;
+    vector<string> results;
+    int n;
+    while (inf >> n) {
+        string all_answers;
+        getline(inf, answer);
+        for (int i = 0; i < n; i++) {
+            getline(inf, answer);
+            all_answers += answer + '\n';
+        }
+        results.push_back(all_answers);
+    }
+    sort(results.begin(), results.end());
+    for (auto q : results) {
+        cout << q << endl;
     }
 
 }
