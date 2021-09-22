@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <map>
 
 using namespace std;
 
@@ -26,24 +27,27 @@ void questions(){
     outf.close();
 }
 
-void printFile() {
+void printFile(int number) {
     fstream inf("results.txt");
-    string answer;
-    vector<string> results;
+    string answer, key_answer;
+    map<string, string> results;
     int n;
     while (inf >> n) {
         string all_answers;
         getline(inf, answer);
         for (int i = 0; i < n; i++) {
             getline(inf, answer);
+            if (i == number - 1) {
+                key_answer = answer;
+            }
             all_answers += answer + '\n';
         }
-        results.push_back(all_answers);
+        results[key_answer] = all_answers;
     }
-    sort(results.begin(), results.end());
     for (auto q : results) {
-        cout << q << endl;
+        cout << q.second << endl;
     }
+    cout << "number of respondents: " << results.size() << endl;
 
 }
 
@@ -55,6 +59,9 @@ int main(){
     if (answer == "survey") {
         questions();
     } else {
-        printFile();
+        int n;
+        cout << "Enter number of sort key : ";
+        cin >> n;
+        printFile(n);
     }
 }
