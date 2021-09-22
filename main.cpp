@@ -7,6 +7,17 @@
 
 using namespace std;
 
+void change_questions() {
+    cout << "Write your new question: ";
+    string s;
+    getline(cin, s);
+    ofstream coutf;
+    coutf.open("results.txt");
+    coutf << s << '\n';
+    coutf.close();
+    return;
+
+}
 void questions(){
     ofstream outf("results.txt", ios :: app);
     ifstream inf("inputfile.txt");
@@ -53,11 +64,14 @@ void printFile(int number) {
 
 
 int main(){
-    cout << "Do you want to conduct a survey or get results? Enter survey or results: ";
+    cout << "Do you want to conduct a survey or get results or change list of questions? Enter survey or results: ";
     string answer;
     getline(cin, answer);
     if (answer == "survey") {
         questions();
+    } else if (answer == "change list of questions") {
+        change_questions();
+        return 0;
     } else {
         int n;
         cout << "Enter number of sort key : ";
